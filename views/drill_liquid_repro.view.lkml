@@ -36,9 +36,8 @@ view: drill_liquid_repro {
     link: {
       label: "Show all {{ value }} (Buggy - Indented Multiline)"
       # IMPORTANT: Keep the 4-space indentation before each &f[...] line!
-      # Replace <YOUR_MODEL> with your actual model name.
       url: "{% assign vis_config = '{\"type\": \"table\", \"size_to_fit\": true}' %}
-      /explore/<YOUR_MODEL>/drill_liquid_repro?fields=drill_liquid_repro.dyn_sls_ofc_buggy,drill_liquid_repro.status,drill_liquid_repro.total_amount
+      /explore/finance_data1/drill_liquid_repro?fields=drill_liquid_repro.dyn_sls_ofc_buggy,drill_liquid_repro.status,drill_liquid_repro.total_amount
       &f[drill_liquid_repro.dyn_sls_ofc_buggy]={{ value }}
       &f[drill_liquid_repro.status]=Agreed,Quoted,Rejected
       &f[drill_liquid_repro.prmtr_sls_ofc]={{ _filters['drill_liquid_repro.prmtr_sls_ofc'] | url_encode }}
@@ -58,9 +57,8 @@ view: drill_liquid_repro {
     ;;
     link: {
       label: "Show all {{ value }} (Fixed - Stripped Whitespace)"
-      # Replace <YOUR_MODEL> with your actual model name.
       url: "{%- assign vis_config = '{\"type\": \"table\", \"size_to_fit\": true}' -%}
-      /explore/<YOUR_MODEL>/drill_liquid_repro?fields=drill_liquid_repro.dyn_sls_ofc_fixed,drill_liquid_repro.status,drill_liquid_repro.total_amount
+      /explore/finance_data1/drill_liquid_repro?fields=drill_liquid_repro.dyn_sls_ofc_fixed,drill_liquid_repro.status,drill_liquid_repro.total_amount
       {{- '' -}}&f[drill_liquid_repro.dyn_sls_ofc_fixed]={{ value | url_encode }}
       {{- '' -}}&f[drill_liquid_repro.status]=Agreed,Quoted,Rejected
       {{- '' -}}&f[drill_liquid_repro.prmtr_sls_ofc]={{ _filters['drill_liquid_repro.prmtr_sls_ofc'] | strip | url_encode }}
