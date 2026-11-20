@@ -11,6 +11,5 @@ datagroup: finance_data1_default_datagroup {
   # sql_trigger: SELECT MAX(id) FROM etl_log;;
   max_cache_age: "1 hour"
 }
-
+explore: drill_liquid_repro {}
 persist_with: finance_data1_default_datagroup
-
