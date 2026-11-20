@@ -11,7 +11,7 @@ view: drill_liquid_repro {
 
   # Matches customer's original unquoted parameter with allowed_values
   parameter: prmtr_sls_ofc {
-    type: unquoted
+    type: string
     default_value: "rhq"
     allowed_value: { label: "Sales RHQ" value: "rhq" }
     allowed_value: { label: "Sales Sub Country" value: "country" }
