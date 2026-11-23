@@ -9,7 +9,6 @@ view: drill_liquid_repro {
     ;;
   }
 
-  # Matches customer's original unquoted parameter with allowed_values
   parameter: prmtr_sls_ofc {
     type: string
     default_value: "rhq"
@@ -26,16 +25,16 @@ view: drill_liquid_repro {
   # --- BUGGY REPRO: Multiline indented link URL (matches customer LookML) ---
   dimension: dyn_sls_ofc_buggy {
     type: string
-    label: "{% if prmtr_sls_ofc._parameter_value == 'country' %}Sales Sub Country{% elsif prmtr_sls_ofc._parameter_value == 'office' %}Sales Office Code{% else %}Sales RHQ{% endif %}"
+    label: "{% if prmtr_sls_ofc._parameter_value == \"'country'\" %}Sales Sub Country (Buggy){% elsif prmtr_sls_ofc._parameter_value == \"'office'\" %}Sales Office Code (Buggy){% else %}Sales RHQ (Buggy){% endif %}"
     sql:
-      {% if prmtr_sls_ofc._parameter_value == 'country' %} ${sub_cnt_nm}
-      {% elsif prmtr_sls_ofc._parameter_value == 'office' %} ${ofc_cd}
+      {% if prmtr_sls_ofc._parameter_value == "'country'" %} ${sub_cnt_nm}
+      {% elsif prmtr_sls_ofc._parameter_value == "'office'" %} ${ofc_cd}
       {% else %} ${rhq_cd}
       {% endif %}
     ;;
     link: {
       label: "Show all {{ value }} (Buggy - Indented Multiline)"
-      # IMPORTANT: Keep the 4-space indentation before each &f[...] line!
+      # IMPORTANT: Keep the indentation before each &... line!
       url: "{% assign vis_config = '{\"type\": \"table\", \"size_to_fit\": true}' %}
       /explore/finance_data1/drill_liquid_repro?fields=drill_liquid_repro.dyn_sls_ofc_buggy,drill_liquid_repro.status,drill_liquid_repro.total_amount
       &f[drill_liquid_repro.dyn_sls_ofc_buggy]={{ value }}
@@ -46,12 +45,13 @@ view: drill_liquid_repro {
     }
   }
 
-  # --- CONTROL / FIXED: Same link with Liquid whitespace stripping (no inter-line spaces) ---
+  # --- CONTROL / FIXED: Same link with Liquid whitespace stripping ---
   dimension: dyn_sls_ofc_fixed {
     type: string
+    label: "{% if prmtr_sls_ofc._parameter_value == \"'country'\" %}Sales Sub Country (Fixed){% elsif prmtr_sls_ofc._parameter_value == \"'office'\" %}Sales Office Code (Fixed){% else %}Sales RHQ (Fixed){% endif %}"
     sql:
-      {% if prmtr_sls_ofc._parameter_value == 'country' %} ${sub_cnt_nm}
-      {% elsif prmtr_sls_ofc._parameter_value == 'office' %} ${ofc_cd}
+      {% if prmtr_sls_ofc._parameter_value == "'country'" %} ${sub_cnt_nm}
+      {% elsif prmtr_sls_ofc._parameter_value == "'office'" %} ${ofc_cd}
       {% else %} ${rhq_cd}
       {% endif %}
     ;;
